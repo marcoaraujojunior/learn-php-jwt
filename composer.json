@@ -1,0 +1,16 @@
+{
+    "name": "laboratory/php-jwt",
+    "description": "Study How Works JWT",
+    "keywords": ["php", "jwt", "study"],
+    "type": "project",
+    "require": {
+        "php": ">=5.4.0",
+        "silex/silex": "^2.0",
+        "firebase/php-jwt": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lab\\": "src/"
+        }
+    }
+}
