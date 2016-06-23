@@ -32,17 +32,21 @@ class Login
         try {
             $decode = JWT::decode($jwt, $this->key(), ['HS256']);
         } catch (\Exception $e) {
-            return new Response('Token Inválido ' . $e->getMessage());
+            return $app->json(['error' => 'Token Inválido ' . $e->getMessage()], 403);
         }
         $fileToken = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $decode->email . '.jwt';
         if (!file_exists($fileToken)) {
-            return new Response('Token Inválido', 403);
+            return $app->json(['error' => 'Token Inválido'], 403);
         }
         if ($jwt != file_get_contents($fileToken) ) {
-            return new Response('Token Inválido', 403);
+            return $app->json(['error' => 'Token Inválido'], 403);
         }
 
-        return new Response('Token Válido', 201);
+        $data = [
+            'name' => 'Gabriel',
+            'role' => 'Developer',
+        ];
+        return $app->json($data, 201);
     }
 
     protected function key()
